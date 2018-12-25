@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.9/angular-material.min.css">
+<link rel="stylesheet" type="text/css" href="main.css">
+<script src="angular_controller.js"></script>
+<script src="warehouse.js"></script>
+<script src="warehouse_item.js"></script>
+<body ng-app="myShoppingList">
+
+<div  ng-controller="Items">
+<div><h3><b>Items</b> <a href="#" style="float:right" ng-click="ShowHide()"><h4>Add</h4></a></h3></div>
+<table id="t01">
+  <tr><th>Item id</th>
+    <th>Item name</th> 
+<th >Price</th>
+ <th></th>   
+    <th></th>
+  </tr>
+
+  <tr ng-repeat="item in items">
+    <td>{{$index + 1}}</td>
+    <td><input ng-show="itemname" value="{{item.name}}" ><div ng-hide="itemnamenot">{{item.name}}</div></input></td>
+    <td><input ng-show="itemname" value="{{item.price}}"><div ng-hide="itemnamenot">{{item.price}}</div></input></td>
+    <td><a href="" data-ng-click="Showitem($index,1)"><div ng-show="itemnamenot" data-ng-click="update($index,item)">Save</div><div ng-hide="itemnamenot">Edit</div></a></td>
+    <td><a href="" data-ng-click="removeRow($index)">Delete</a></td>
+  </tr>
+  <tr ng-show="IsVisible">
+      <td></td>
+      <td><div class="w3-col s10">
+          <input placeholder="add name here" ng-model="name" class="w3-input w3-border w3-padding">
+        </div></td>
+      <td><div class="w3-col s10">
+          <input placeholder="Add price here" ng-model="price" class="w3-input w3-border w3-padding">
+        </div></td>
+      <td><button ng-click="addRow()">Add</button></td>
+      <td></td>
+    </tr>
+    </table>
+</table>
+</div>
+
+<div  ng-controller="Warehouse">
+<div><h3><b>Warehouse</b> <a href="#" style="float:right" ng-click="ShowHide()"><h4>Add</h4></a></h3></div>
+<table id="t01">
+  <tr>
+    <th>Warehouse id</th>
+    <th>Warehouse Name</th> 
+    <th >address</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr ng-repeat="item in warehouse">
+    <td>{{$index + 1}}</td>
+    <td><a href="" data-ng-click="Showjson($index,1)"><input ng-show="itemname" value="{{item.name}}" ><div ng-hide="itemnamenot">{{item.name}}</div></input></a></td>
+    <td><input ng-show="itemname" value="{{item.address}}"><div ng-hide="itemnamenot">{{item.address}}</div></input></td>
+    <td><a href="" data-ng-click="Showitem($index,1)"><div ng-show="itemnamenot" data-ng-click="update($index,item)">Save</div><div ng-hide="itemnamenot">Edit</div></a></td>
+    <td><a href="" data-ng-click="removeRow($index)">Delete</a></td>
+    
+  </tr>
+  <tr ng-show="IsVisible">
+    <td></td>
+    <td><div class="w3-col s10">
+        <input placeholder="Add name items here" ng-model="name" class="w3-input w3-border w3-padding">
+      </div></td>
+    <td><div class="w3-col s10">
+        <input placeholder="Add address  here" ng-model="address" class="w3-input w3-border w3-padding">
+      </div></td>
+    <td><button ng-click="addRow()">Add</button></td>
+    <td></td>
+  </tr>
+</table>
+
+
+
+
+<div ng-controller="Warehouse_item">
+<div><h3><b>Warehouse Items</b></h3></div>
+<table id="t01">
+  <tr>
+    <th>Warehouse</th>
+    <th>Item</th> 
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr  ng-repeat="item in warehouse">
+      <td>{{item.name}}</td>
+      <td>{{item.nameq+ " (" + item.q + ")"}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+    <td><div><select name="cars" ng-model="name" ng-options="x.name for x in warehouse">
+    </select></div></td>
+    <td><div><select name="cars" ng-model="nameq" ng-options="x.nameq for x in warehouse">
+      </select></div></td>
+    <td><div class="w3-col s10">
+        <input placeholder="Add quantity here" ng-model="q" class="w3-input w3-border w3-padding">
+      </div></td>
+    <td><button data-ng-click="update($index,warehouse)">Add</button></td>
+    <td></td>
+  </tr>
+</table>
+<div ng-show="json">warehouse json::{{warehouse3 | json}}</div>
+</div>
+
+</div>
+</body>
+</html>
